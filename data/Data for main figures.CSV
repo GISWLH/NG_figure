@@ -1,0 +1,15 @@
+Figure 3a,,,,,,,Figure 3b,,,,,Figure 3c,,,,
+SSP2-4.5,Change in water cycle component (mm year-1) obtained from mean of ESMs,Uncertainty in change in water cycle component (mm year-1)  from ESMs,Change in water cycle component (mm year-1) obtained from EC,Uncertainty in change in water cycle component (mm year-1)  from EC,,SSP5-8.5,Change in water cycle component (mm year-1) obtained from mean of ESMs,Uncertainty in change in water cycle component (mm year-1)  from ESMs,Change in water cycle component (mm year-1) obtained from EC,Uncertainty in change in water cycle component (mm year-1)  from EC,,SSP2-4.5,Water cycle component change per degree (mm year-1 K-1) obtained from mean of ESMs,Uncertainty in water cycle component change per degree (mm year-1 K-1) obtained from mean of ESMs,Water cycle component change per degree (mm year-1 K-1) obtained from EC,Uncertainty in water cycle component change per degree (mm year-1 K-1)  from EC
+Ocean P,44.8,16.4,25.2,17.0,,,62.8,24.1,41.9,27.4,,Ocean P,17.4,28.4,16.1,31.4
+Ocean E,54.1,20.5,30.0,19.9,,,73.8,25.2,45.4,24.9,,Ocean E,19.1,31.7,14.9,31.0
+Land P,46.7,19.8,36.3,11.5,,,65.5,27.1,54.1,17.9,,Land P,11.3,20.2,10.7,12.9
+Land E,27.8,12.9,16.0,12.4,,,35.5,21.6,20.8,18.3,,Land E,4.6,15.1,2.9,13.2
+Land Q,26.4,15.7,20.2,4.5,,,40.8,22.0,33.3,7.6,,Land Q,8.6,16.3,7.8,5.5
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+,Uncertainty reduction by %,,,,,,Uncertainty reduction by %,,,,,,,,,
+Ocean P,,3.6,,,,Ocean P,,13.6,,,,,,,,
+Ocean E,,-2.6,,,,Ocean E,,-1.2,,,,,,,,
+Land P,,-41.8,,,,Land P,,-34.1,,,,,,,,
+Land E,,-4,,,,Land E,,-15.4,,,,,,,,
+Land Q,,-71.4,,,,Land Q,,-65.7,,,,,,,,
