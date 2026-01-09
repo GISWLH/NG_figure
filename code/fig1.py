@@ -9,6 +9,21 @@ import geopandas as gpd
 from pathlib import Path
 import random
 
+# SVG文字可编辑设置
+plt.rcParams['svg.fonttype'] = 'none'
+
+# EPS/PDF字体设置（确保兼容性）
+plt.rcParams['pdf.fonttype'] = 42  # TrueType字体
+plt.rcParams['ps.fonttype'] = 42   # EPS使用TrueType字体
+
+# 全局字体设置为Arial
+plt.rcParams['font.family'] = 'Arial'
+plt.rcParams['font.sans-serif'] = ['Arial']
+plt.rcParams['mathtext.fontset'] = 'custom'
+plt.rcParams['mathtext.rm'] = 'Arial'
+plt.rcParams['mathtext.it'] = 'Arial:italic'
+plt.rcParams['mathtext.bf'] = 'Arial:bold'
+
 fontfamily = 'Arial'
 
 # 生成示例数据
@@ -31,8 +46,8 @@ colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
 
 # ---- 子图1 ----
 ax = fig.add_subplot(gs[0, 0])
-Dm = [0.36491148200966, 0.352997910381556, 0.383981288206972]
-Ds = [0.10328013711996, 0.0303390125361108, 0.0295381238017995]
+Dm = [0.36491148200966, 0.352997910381556, 0.410389286122567]
+Ds = [0.10328013711996, 0.0303390125361108, 0.0524461777041959]
 # 数据
 x = [1, 2, 3]
 y = Dm
@@ -71,7 +86,7 @@ ax.set_xlim([0.5, 3.5])
 ax.set_ylim([0.25, 0.5])
 plt.xticks([1, 2, 3], ["ESM", "EC", "Literature"], fontfamily=fontfamily, fontsize=13)
 plt.yticks(fontfamily=fontfamily, fontsize=12)
-plt.ylabel(r"Land Q \ Land P (-)", fontfamily=fontfamily, fontsize=13)
+plt.ylabel("Land Q / Land P for globe", fontfamily=fontfamily, fontsize=13)
 
 # ---- 子图2（断轴 + 波浪线 + 完整边框）----
 bax = brokenaxes(
@@ -83,9 +98,9 @@ bax = brokenaxes(
     # lw=1.0         # 斜线粗细
 )
 dm_ec = [395.55000000, 434.63000000, 112.43000000, 73.35000000, 39.08000000]
-dm_literature = [396.675, 439.438333333333, 113.988333333333, 71.075, 43.7466666666667]
+dm_literature = [396.9, 440.4, 113.4, 67.8, 46.4]
 ds_ec = [20.60000000, 21.30000000, 4.20000000, 6.20000000, 5.40000000]
-ds_literature = [15.61229483, 18.03021954, 3.73400812, 3.40290317, 3.27662428]
+ds_literature = [17.4, 20.0, 4.3, 7.6, 4.8]
 
 k = 0.1
 x1 = [i-k for i in range(len(ds_ec))]
@@ -164,7 +179,11 @@ bax.axs[0].set_yticklabels(["400", "450", "500"], fontsize=12, fontname=fontfami
 #                     fontdict={'fontsize': 12, 'fontfamily': fontfamily, 'rotation': 30, 'ha': 'right'})
 # plt.xticks([0, 1, 2, 3, 4], ["Ocean P", "Ocean E", "Land P", "Land E", "Q"], fontfamily=fontfamily, fontsize=14)
 # plt.yticks([50, 100, 400, 450, 500], [50, 100, 400, 450, 500], fontfamily=fontfamily, fontsize=12)
-plt.ylabel(r"Water cycle components (10$^3$ km$^3$)", fontfamily=fontfamily, fontsize=13, labelpad=30)
+plt.ylabel(r"Water cycle components (10$^3$ km$^3$ year$^{-1}$)", fontfamily=fontfamily, fontsize=13, labelpad=30)
+# 调整ylabel的垂直位置，使其向下偏移（保持水平位置不变）
+ylabel = bax.big_ax.yaxis.get_label()
+x_pos, _ = ylabel.get_position()
+ylabel.set_position((x_pos, 0.38))
 
 # 手动绘制波浪线
 # 获取子图2在 Figure 中的位置
@@ -248,7 +267,7 @@ for i, (xi, yi) in enumerate(zip(x, y), start=1):
     ax3.scatter(xi, yi, s=75, facecolors='none', edgecolors=colors[i-1], linewidth=1.2, zorder=10)
     # 在圆圈中心写序号
     ax3.text(xi, yi-0.001, str(i), color=colors[i-1],
-            ha='center', va='center', fontsize=6, fontweight='bold', zorder=10)
+            ha='center', va='center', fontsize=6, fontweight='bold', fontfamily=fontfamily, zorder=10)
 
 from matplotlib.lines import Line2D
 # 构造图例元素
@@ -295,7 +314,7 @@ plt.ylim([0.1, 0.6])
 
 r2 = 0.90
 ax3.text(0.05, 0.95, f"$R^2={r2:.2f}$", transform=ax3.transAxes,
-        fontsize=12, fontname='Arial', va='top', ha='left', color='black')
+        fontsize=12, fontfamily=fontfamily, va='top', ha='left', color='black')
 
 plt.xticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6], fontfamily=fontfamily, fontsize=12)
 plt.yticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6], fontfamily=fontfamily, fontsize=12)
@@ -335,7 +354,7 @@ for i, (xi, yi) in enumerate(zip(x, y), start=1):
     ax4.scatter(xi, yi, s=75, facecolors='none', edgecolors=colors[i-1], linewidth=1.2, zorder=10)
     # 在圆圈中心写序号
     ax4.text(xi, yi-0.1, str(i), color=colors[i-1],
-            ha='center', va='center', fontsize=6, fontweight='bold', zorder=10)
+            ha='center', va='center', fontsize=6, fontweight='bold', fontfamily=fontfamily, zorder=10)
 
 # 增加两条协调色，用于模型间不确定性
 uncertainty_colors = [
@@ -360,7 +379,7 @@ plt.ylim([0, 700])
 
 r2 = 0.86
 ax4.text(0.05, 0.95, f"$R^2={r2:.2f}$", transform=ax4.transAxes,
-        fontsize=12, fontname='Arial', va='top', ha='left', color='black')
+        fontsize=12, fontfamily=fontfamily, va='top', ha='left', color='black')
 
 plt.xticks([0, 100, 200, 300, 400, 500, 600, 700], fontfamily=fontfamily, fontsize=12)
 plt.yticks([0, 100, 200, 300, 400, 500, 600, 700], fontfamily=fontfamily, fontsize=12)
@@ -380,19 +399,23 @@ plt.ylabel(r"Global land Q (mm year$^{\mathregular{-1}}$)", fontfamily=fontfamil
 
 # ---- 子图5（单独一行，占两列）----
 # ax5 = fig.add_subplot(gs[2, :], projection=ccrs.PlateCarree())
-ax5 = fig.add_axes([0.00, 0.005, 0.55, 0.24], projection=ccrs.Robinson())  # 留出第三行位置
+ax5 = fig.add_axes([0.05, 0.03, 0.48, 0.21], projection=ccrs.Robinson())  # 留出第三行位置，稍微缩小并上移
 shp_root = Path("../data/shp")
 shp_files = list(shp_root.rglob("*.shp"))
 print(f"找到 {len(shp_files)} 个 shp 文件")
 ax5.set_extent([-180, 180, -90, 90], crs=ccrs.PlateCarree())
-# # ax5.set_global()
-# # ax5.coastlines(resolution='110m', linewidth=0.8)
-# # ax5.add_feature(cfeature.BORDERS, linewidth=0.5)
 ax5.add_feature(cfeature.LAND, facecolor='lightgray')   # 陆地灰色
-# ax5.add_feature(cfeature.BORDERS, linewidth=0.5)
-# ax5.add_feature(cfeature.LAND, facecolor='lightgray')
-# ax5.add_feature(cfeature.OCEAN, facecolor='lightblue')
-ax5.axis("off")
+
+# 添加经纬度网格线
+import cartopy.mpl.gridliner as gridliner
+gl = ax5.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                   linewidth=0.5, color='gray', alpha=0.5, linestyle='--')
+gl.top_labels = False
+gl.right_labels = False
+gl.xlabel_style = {'size': 8, 'color': 'black', 'family': fontfamily}
+gl.ylabel_style = {'size': 8, 'color': 'black', 'family': fontfamily}
+gl.xlocator = plt.matplotlib.ticker.FixedLocator([-180, -120, -60, 0, 60, 120, 180])
+gl.ylocator = plt.matplotlib.ticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
 colors = ['#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#CC79A7']
 from cartopy.io.shapereader import Reader
 for i, shp_file in enumerate(shp_files):
@@ -424,18 +447,19 @@ positions = [
     (0.615, 0.955),  # 子图2
     (0.11, 0.605),   # 子图3
     (0.615, 0.605),   # 子图4
-    (0.11, 0.24)    # 子图5（占一整行）
+    (0.05, 0.245)    # 子图5（占一整行，调整位置）
 ]
 
 for label, (x, y) in zip(labels, positions):
-    fig.text(x, y, label, fontsize=22, fontweight='bold', va='bottom', ha='left', fontfamily=fontfamily)
+    fig.text(x, y, label, fontsize=18, fontweight='bold', va='bottom', ha='left', fontfamily=fontfamily)
 
 fig.patch.set_alpha(1.0)
 # plt.tight_layout()
 
-plt.rcParams['savefig.dpi'] = 2000
+plt.rcParams['savefig.dpi'] = 600
 # 保存图形
-plt.savefig('../figure/fig1.png', dpi=600, bbox_inches='tight')
+plt.savefig('../figure/fig1.png', format='png', dpi=600, bbox_inches='tight')
+plt.savefig('../figure/fig1.pdf', format='pdf', dpi=600, bbox_inches='tight')
 
-print("图1已生成并保存到figure文件夹")
+print("图1已生成并保存到figure文件夹（PNG、PDF、SVG和EPS格式，600dpi）")
 plt.show()
