@@ -1,6 +1,12 @@
-﻿# NG Figure Reproduction
+# NG Figure Reproduction
 
 This repository houses Python scripts and supporting data used to regenerate the published Figure 1 to Figure 3. Each script reads the data stored under `data/` and writes the rendered artwork to `figure/`.
+
+## Citation
+
+If you use this code or data, please cite:
+
+> Zhang, Y., Blöschl, G., Wei, H. et al. Overestimation of past and future increases in global river flow by Earth system models. *Nat. Geosci.* (2026). https://doi.org/10.1038/s41561-025-01897-9
 
 ## Repository Layout
 - `code/fig1.py` - builds the multi-panel Figure 1, including the global map assembled from basin shapefiles.
